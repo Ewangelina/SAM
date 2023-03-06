@@ -1,2 +1,2 @@
 #!/bin/bash
-java ./server.java
+python3 ./server.py
