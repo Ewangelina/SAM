@@ -12,13 +12,11 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         print(self.path)
         
         if self.path == '/':
-            parsed_url = urlparse(self.path)
-            captured_value = parse_qs(parsed_url.query)['videoFile'][0]
             self.protocol_version = 'HTTP/1.1'
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()            
-            self.wfile.write("<video controls> <source src=\"" + captured_value + "\"> </video> ")
+            self.wfile.write(b"Hello World!\n")
         else:
             super().do_GET()
     
