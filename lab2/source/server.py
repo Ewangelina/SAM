@@ -60,16 +60,22 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 			
 			
 		if video_flag == 1:
-			self.wfile.write(b"<button id = \"videoCancel\" onclick = \"cancelVideo()\"> Video cancel </button>")
+			self.wfile.write(b"<button id = \"videoCancel\" onclick = cancelVideo()> Video cancel </button>")
 			self.wfile.write(b"<script>")
 			self.wfile.write(b"function cancelVideo() {")
-			self.wfile.write(b"var para1 = document.getElementById(\"videoPlayer\");")
+			self.wfile.write(b"var para1 = document.getElementById(\"videoPlayer\");\n")
 			
-			self.wfile.write(b"para1.innerHTML = \"<source src=\"cancel.mp4\">\";")
-			self.wfile.write(b"}<\script>")
+			self.wfile.write(b"para1.innerHTML = \"<source src=\"cancel.mp4\" type=\"video\">\";\n")
+			self.wfile.write(b"}\n</script>")
+			
 			
 		if audio_flag == 1:
 			self.wfile.write(b"<button id = \"audioCancel\" onclick = \"cancelAudio()\"> Audio cancel </button>")
+			self.wfile.write(b"<script>")
+			self.wfile.write(b"function cancelAudio() {")
+			self.wfile.write(b"var para1 = document.getElementById(\"vaudioPlayer\");\n")
+			self.wfile.write(b"para1.innerHTML = \"<source src=\"cancel.mp3\" type=\"video\">\";\n")
+			self.wfile.write(b"}\n</script>")
 		        
     
 # --- main ---
