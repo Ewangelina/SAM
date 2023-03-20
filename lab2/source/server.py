@@ -12,7 +12,8 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 	def do_GET(self):
 
 		print(self.path)
-       
+		audio_flag = false
+		video_flag = false
         
 		self.protocol_version = 'HTTP/1.1'
 		self.send_response(200)
@@ -39,6 +40,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 				self.wfile.write(bytes(parsed_url['videoFile'][0], encoding="utf-8"))
 				self.wfile.write(b"\" type=\"video\">")
 				self.wfile.write(b"</video>")
+				video_flag = true
 				
 			except:
 				self.wfile.write(b"NO VIDEO\n")
@@ -50,10 +52,16 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 				self.wfile.write(bytes(parsed_url['audioFile'][0], encoding="utf-8"))
 				self.wfile.write(b"\" type=\"audio\">")
 				self.wfile.write(b"</audio>")
+				audio_flag = true
 			except:
 				self.wfile.write(b"NO AUDIO\n")
 		except:
 			self.wfile.write(b"NO ARGUMENTS\n")
+	if video_flag:
+		self.wfile.write(b"<button id = \"videoCancel\" onclick = \"cancelVideo()\"> Video cancel </button>")
+		
+	if audio_flag:
+		self.wfile.write(b"<button id = \"audioCancel\" onclick = \"cancelAudio()\"> Audio cancel </button>")
 		        
     
 # --- main ---
