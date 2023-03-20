@@ -22,10 +22,19 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 		params = self.path.split("?")
 		try:
 			parsed_url = parse_qs(params[1])
+			
+			try:
+				parsed_url['imgFile'][0]
+				self.wfile.write(b"<img id=\"posterImage\" src=\"")
+				self.wfile.write(bytes(parsed_url['imgFile'][0], encoding="utf-8"))
+				self.wfile.write(b"\">")
+						 
+			except:
+				self.wfile.write(b"NO IMAGE\n")
 				
 			try:
 				parsed_url['videoFile'][0]
-				self.wfile.write(b"<video width=\"320\" height=\"240\" controls>")
+				self.wfile.write(b"<video id=\"videoPlayer\" width=\"320\" height=\"240\" controls>")
 				self.wfile.write(b"<source src=\"")
 				self.wfile.write(bytes(parsed_url['videoFile'][0], encoding="utf-8"))
 				self.wfile.write(b"\" type=\"video\">")
@@ -36,7 +45,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 				
 			try:
 				parsed_url['audioFile'][0]
-				self.wfile.write(b"<audio controls>")
+				self.wfile.write(b"<audio id=\"audioPlayer\" controls>")
 				self.wfile.write(b"<source src=\"")
 				self.wfile.write(bytes(parsed_url['audioFile'][0], encoding="utf-8"))
 				self.wfile.write(b"\" type=\"audio\">")
