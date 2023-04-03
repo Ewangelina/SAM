@@ -41,7 +41,7 @@ app.get("/", function(req, res) {
 		`newRow.innerHTML = myHtmlContent;` +
 	`}</script>`;
 	res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	res.write(writable);
+	res.write(writable); //change in case of cancel
 	res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
         
         
