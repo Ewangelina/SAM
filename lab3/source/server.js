@@ -61,7 +61,17 @@ app.get("/", function(req, res) {
     {
         res.write(`<p>No poster image</p><BR>`);
     }
-    
+	
+    //table
+    res.write(`<table><tr>`);
+    res.write(`<th>Company</th>`);
+    res.write(`<table><tr>`);
+    res.write(`<th>Company</th>`);
+    res.write(`<th>Contact</th>`);
+    res.write(`<th>Country</th></tr>`);
+    res.write(`<tr><td>Alfreds Futterkiste</td><td>Maria Anders</td><td>Germany</td></tr><tr>`);
+    res.write(`<td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Mexico</td>`);
+    res.write(`</tr></table>`);    
   });
 
 
