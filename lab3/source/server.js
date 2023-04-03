@@ -33,6 +33,8 @@ app.get("/", function(req, res) {
         
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
         res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
+	    
+        res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
         
     }
     else
@@ -46,6 +48,8 @@ app.get("/", function(req, res) {
 
 	res.write(`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
         res.write(`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
+	    
+        res.write(`<button id = "audioAdd" onclick = "add_video()">Add audio</button>`);
     }
     else
     {
