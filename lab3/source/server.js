@@ -33,14 +33,8 @@ app.get("/", function(req, res) {
         
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
         res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	   
-        res.write(`<script>function add_video(){
-	var myHtmlContent = `<tr>
-    	<td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>`
-var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];
+	let writable = `<script>function add_video(){var myHtmlContent = "<tr><td>` + "numhir" + `</td><td>` + videoFile + `</td><td>Video</td></tr>` +\
+	    var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];
 
 var newRow = tableRef.insertRow(tableRef.rows.length);
 newRow.innerHTML = myHtmlContent;
