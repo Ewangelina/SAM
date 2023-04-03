@@ -34,10 +34,10 @@ app.get("/", function(req, res) {
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
         
         
-	let writable = `<script>function add_video(){console.log("OK");"<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "` 
+	let writable = `<script>function add_video(){let tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0]; let myHtmlContent = "<tr><td>" + tableRef.rows.length + "` 
 	+ `</td><td>` + videoFile + `</td><td>Video</td></tr>"` +
-	    `var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];` +
-		`var newRow = tableRef.insertRow(tableRef.rows.length);` +
+	    `` +
+		`let newRow = tableRef.insertRow(tableRef.rows.length);` +
 		`newRow.innerHTML = myHtmlContent;` +
 	`}</script>`;
 	res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
@@ -57,8 +57,16 @@ app.get("/", function(req, res) {
 
 	res.write(`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
         res.write(`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
+        
+        let writable = `<script>function add_audio(){let myHtmlContent = "<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "` 
+	+ `</td><td>` + audioFile + `</td><td>Audio</td></tr>"` +
+	    `var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];` +
+		`var newRow = tableRef.insertRow(tableRef.rows.length);` +
+		`newRow.innerHTML = myHtmlContent;` +
+	`}</script>`;
 	    
         res.write(`<button id = "audioAdd" onclick = "add_audio()">Add audio</button>`);
+        res.write(writable);
     }
     else
     {
