@@ -33,7 +33,18 @@ app.get("/", function(req, res) {
         
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
         res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	    
+	   
+        res.write(`<script>function add_video(){
+	var myHtmlContent = `<tr>
+    	<td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>`
+var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];
+
+var newRow = tableRef.insertRow(tableRef.rows.length);
+newRow.innerHTML = myHtmlContent;
+	}</script>`);
         res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
         
     }
@@ -49,7 +60,7 @@ app.get("/", function(req, res) {
 	res.write(`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
         res.write(`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
 	    
-        res.write(`<button id = "audioAdd" onclick = "add_video()">Add audio</button>`);
+        res.write(`<button id = "audioAdd" onclick = "add_audio()">Add audio</button>`);
     }
     else
     {
