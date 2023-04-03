@@ -32,14 +32,18 @@ app.get("/", function(req, res) {
         res.write(`<BR>`);
         
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
-        res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	let writable = `<script>function add_video(){var myHtmlContent = "<tr><td>` + `document.getElementById("playlist_table").tBodies[0].rows.length.toString();` + `</td><td>` + videoFile + `</td><td>Video</td></tr>` +\
-	    `var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];` +\
-		`var newRow = tableRef.insertRow(tableRef.rows.length);` +\
-		`newRow.innerHTML = myHtmlContent;` +\
+        
+        
+	let writable = `<script>function add_video(){console.log("OK");"<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "` 
+	+ `</td><td>` + videoFile + `</td><td>Video</td></tr>"` +
+	    `var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];` +
+		`var newRow = tableRef.insertRow(tableRef.rows.length);` +
+		`newRow.innerHTML = myHtmlContent;` +
 	`}</script>`;
+	res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
 	res.write(writable);
-        res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
+	res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
+        
         
     }
     else
