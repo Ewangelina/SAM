@@ -67,10 +67,8 @@ app.get("/", function(req, res) {
     res.write(`<th>No</th>`);
     res.write(`<th>URL</th>`);
     res.write(`<th>Type</th>`);
-    res.write(`<th>Country</th></tr>`);
-    res.write(`<tr><td>Alfreds Futterkiste</td><td>Maria Anders</td><td>Germany</td></tr><tr>`);
-    res.write(`<td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Mexico</td>`);
-    res.write(`</tr></table>`);    
+    res.write(`</tr>`);
+    res.write(`</table>`);    
   });
 
 
