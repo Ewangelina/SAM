@@ -2,22 +2,6 @@ const express = require('express')
 
 const app = express()
 
-function getQueryVariable(adress, variable) 
-{
-  var query = adress.split(`?`);
-  if (query.length == 1) return null;
-  var vars = query[1].split(`&`);
-
-  for (var i=0;i<vars.length;i++) {
-    var pair = vars[i].split(`=`);
-    if (pair[0] == variable) {
-      return pair[1];
-    }
-  } 
-  
-  return null;
-}
-
 app.get("/", function(req, res) {
     const videoFile = req.query.videoFile;
     const audioFile = req.query.audioFile;
