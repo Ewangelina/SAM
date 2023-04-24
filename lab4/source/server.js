@@ -22,81 +22,95 @@ app.get("/", function(req, res) {
     const videoFile = req.query.videoFile;
     const audioFile = req.query.audioFile;
     const posterImage = req.query.imgFile;
+    
+    let ret = "";
   
     res.set(`Content-Type`, `text/html`);
 
         
     if(videoFile)
     {
-        res.write(`<video id = "videoPlayer" src="` + videoFile + `" controls></video>`);
-        res.write(`<BR>`);
+        ret += (`<video id = "videoPlayer" src="` + videoFile + `" controls></video>`);
+        ret += (`<BR>`);
         
-        res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
+        ret += (`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
                 
-	res.write(`<script>`);
-	res.write(`	function add_video()`);
-	res.write(`	{`);
-	res.write(`		let tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0]; `);
-	res.write(`		let myHtmlContent = "<tr><td>" + tableRef.rows.length + "</td><td>";`);
-	res.write(`		myHtmlContent += document.getElementById('videoPlayer').src;`);
-	res.write(`		myHtmlContent += "</td><td>Video</td></tr>";`);
-	res.write(`		let newRow = tableRef.insertRow(tableRef.rows.length);`);
-	res.write(`		newRow.innerHTML = myHtmlContent;`);
-	res.write(`	}`);
-	res.write(`</script>`);
-	res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button><br>`);
+	ret += (`<script>`);
+	ret += (`	function add_video()`);
+	ret += (`	{`);
+	ret += (`		let tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0]; `);
+	ret += (`		let myHtmlContent = "<tr><td>" + tableRef.rows.length + "</td><td>";`);
+	ret += (`		myHtmlContent += document.getElementById('videoPlayer').src;`);
+	ret += (`		myHtmlContent += "</td><td>Video</td>";`);
+	ret += (`		myHtmlContent += "<td> <button type='button' class = 'removeRowButton' onclick = this.parentElement.parentElement.remove()>Delete</button> </td></tr>";`);
+	ret += (`		let newRow = tableRef.insertRow(tableRef.rows.length);`);
+	ret += (`		newRow.innerHTML = myHtmlContent;`);
+	ret += (`	}`);
+	ret += (`</script>`);
+	ret += (`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
+	ret += (`<button id = "videoAdd" onclick = "add_video()">Add video</button><br>`);
         
         
     }
     else
     {
-        res.write(`<p>No video file</p><BR>`);
+        ret += (`<p>No video file</p><BR>`);
     }
 
     if(audioFile){
-        res.write(`<audio id="audioPlayer" src="` + audioFile +`" controls/>`);
-        res.write(`</audio><BR>`);
+        ret += (`<audio id="audioPlayer" src="` + audioFile +`" controls/>`);
+        ret += (`</audio><BR>`);
 
-	res.write(`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
-        res.write(`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
+	ret += (`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
+        ret += (`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
         
-        res.write(`<script>`);
-	res.write(`	function add_audio()`);
-	res.write(`	{`);
-	res.write(`		let myHtmlContent = "<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "</td><td>";`);
-	res.write(`		myHtmlContent += document.getElementById('audioPlayer').src;`);
-	res.write(`		myHtmlContent += "</td><td>Audio</td></tr>";`);
-	res.write(`		var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];`);
-	res.write(`		var newRow = tableRef.insertRow(tableRef.rows.length);`);
-	res.write(`		newRow.innerHTML = myHtmlContent;`);
-	res.write(`	}`);
-	res.write(`</script>`);
+        ret += (`<script>`);
+	ret += (`	function add_audio()`);
+	ret += (`	{`);
+	ret += (`		let myHtmlContent = "<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "</td><td>";`);
+	ret += (`		myHtmlContent += document.getElementById('audioPlayer').src;`);
+	ret += (`		myHtmlContent += "</td><td>Audio</td>";`);
+	ret += (`		myHtmlContent += "<td> <button type='button' class = 'removeRowButton' onclick = this.parentElement.parentElement.remove()>Delete</button> </td></tr>";`);
+	ret += (`		var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];`);
+	ret += (`		var newRow = tableRef.insertRow(tableRef.rows.length);`);
+	ret += (`		newRow.innerHTML = myHtmlContent;`);
+	ret += (`	}`);
+	ret += (`</script>`);
+	
+	ret += (`<script>`);
+	ret += (`	function delete_row(num)`);
+	ret += (`	{`);
+	ret += (`		document.getElementById('playlist_table').deleteRow(num); `);
+	ret += (`	}`);
+	ret += (`</script>`);
 	    
-        res.write(`<button id = "audioAdd" onclick = "add_audio()">Add audio</button><br>`);
+        ret += (`<button id = "audioAdd" onclick = "add_audio()">Add audio</button><br>`);
     }
     else
     {
-        res.write(`<p>No audio file</p><BR>`);
+        ret += (`<p>No audio file</p><BR>`);
     }
 
 
     if(posterImage)
     {
-        res.write(`<img src="` + posterImage +`" id = "posterImage">`);
+        ret += (`<img src="` + posterImage +`" id = "posterImage">`);
     }
     else
     {
-        res.write(`<p>No poster image</p><BR>`);
+        ret += (`<p>No poster image</p><BR>`);
     }
 	
     //table
-    res.write(`<table id = playlist_table><tr>`);
-    res.write(`<th>No</th>`);
-    res.write(`<th>URL</th>`);
-    res.write(`<th>Type</th>`);
-    res.write(`</tr>`);
-    res.write(`</table>`);    
+    ret += (`<table id = playlist_table><tr>`);
+    ret += (`<th>No</th>`);
+    ret += (`<th>URL</th>`);
+    ret += (`<th>Type</th>`);
+    ret += (`<th>Action</th>`);
+    ret += (`</tr>`);
+    ret += (`</table>`);    
+    
+    res.send(ret);
   });
 
 
