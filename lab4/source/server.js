@@ -32,17 +32,20 @@ app.get("/", function(req, res) {
         res.write(`<BR>`);
         
         res.write(`<script>function cancel_video(){ document.getElementById("videoPlayer").src = "cancel.mp4";}</script>`);
-        
-        
-	let writable = `<script>function add_video(){let tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0]; let myHtmlContent = "<tr><td>" + tableRef.rows.length + "` 
-	+ `</td><td>` + videoFile + `</td><td>Video</td></tr>"` +
-	    `` +
-		`let newRow = tableRef.insertRow(tableRef.rows.length);` +
-		`newRow.innerHTML = myHtmlContent;` +
-	`}</script>`;
+                
+	res.write(`<script>`);
+	res.write(`	function add_video()`);
+	res.write(`	{`);
+	res.write(`		let tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0]; `);
+	res.write(`		let myHtmlContent = "<tr><td>" + tableRef.rows.length + "</td><td>";`);
+	res.write(`		myHtmlContent += document.getElementById('videoPlayer').src;`);
+	res.write(`		myHtmlContent += "</td><td>Video</td></tr>";`);
+	res.write(`		let newRow = tableRef.insertRow(tableRef.rows.length);`);
+	res.write(`		newRow.innerHTML = myHtmlContent;`);
+	res.write(`	}`);
+	res.write(`</script>`);
 	res.write(`<button id = "videoCancel" onclick = "cancel_video()">Cancel video</button>`);
-	res.write(writable); //change in case of cancel
-	res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button>`);
+	res.write(`<button id = "videoAdd" onclick = "add_video()">Add video</button><br>`);
         
         
     }
@@ -58,15 +61,19 @@ app.get("/", function(req, res) {
 	res.write(`<script>function cancel_audio(){ document.getElementById("audioPlayer").src = "cancel.mp3";}</script>`);
         res.write(`<button id="audioCancel" onclick="cancel_audio()">Cancel audio</button>`);
         
-        let writable = `<script>function add_audio(){let myHtmlContent = "<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "` 
-	+ `</td><td>` + audioFile + `</td><td>Audio</td></tr>"` +
-	    `var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];` +
-		`var newRow = tableRef.insertRow(tableRef.rows.length);` +
-		`newRow.innerHTML = myHtmlContent;` +
-	`}</script>`;
+        res.write(`<script>`);
+	res.write(`	function add_audio()`);
+	res.write(`	{`);
+	res.write(`		let myHtmlContent = "<tr><td>" + document.getElementById("playlist_table").tBodies[0].rows.length.toString() + "</td><td>";`);
+	res.write(`		myHtmlContent += document.getElementById('audioPlayer').src;`);
+	res.write(`		myHtmlContent += "</td><td>Audio</td></tr>";`);
+	res.write(`		var tableRef = document.getElementById('playlist_table').getElementsByTagName('tbody')[0];`);
+	res.write(`		var newRow = tableRef.insertRow(tableRef.rows.length);`);
+	res.write(`		newRow.innerHTML = myHtmlContent;`);
+	res.write(`	}`);
+	res.write(`</script>`);
 	    
-        res.write(`<button id = "audioAdd" onclick = "add_audio()">Add audio</button>`);
-        res.write(writable);
+        res.write(`<button id = "audioAdd" onclick = "add_audio()">Add audio</button><br>`);
     }
     else
     {
