@@ -3,8 +3,12 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
+	const videoFile = req.query.videoFile;
+    	const audioFile = req.query.audioFile;
+    	const posterImage = req.query.imgFile;
+    	
 	let ret = '';
-	if (req.query.audioFile) {
+	if (audioFile) {
 		ret += `<audio id = "audioPlayer" src = ${req.query.audioFile}></audio>`;
 		ret += `<button type="button" id = "audioCancel">cancel audio</button>`;
 		ret += `<button type="button" id = "audioAdd">Add audio</button>`;
@@ -12,28 +16,27 @@ app.get('/', (req, res) => {
 		() => document.getElementById("audioPlayer").src = "cancel.mp3")</script>`
 
 	}
-	if (req.query.videoFile) {
+	if (videoFile) {
 		ret += `</br> <video id = "videoPlayer" src = ${req.query.videoFile}></video>`;
 		ret += `<button type="button" id = "videoCancel">cancel video</button>`;
 		ret += `<button type="button" id = "videoAdd">Add video</button>`;
 		ret += `<script>document.getElementById("videoCancel").addEventListener('click', 
 		() => document.getElementById("videoPlayer").src = "cancel.mp4")</script>`
 	}
-	if (req.query.imgFile) {
+	if (posterImage) {
 		ret += `<img src=${req.query.imgFile} id = "posterImage">`;
 		ret += `<button type="button" id = "imgCancel">cancel image</button>`;
 		ret += `<button type="button" id = "imgAdd">Add img</button>`;
 		ret += `<script>document.getElementById("imgCancel").addEventListener('click', 
 		() => document.getElementById("posterImage").src = "cancel.jpg")</script>`
 	}
-	ret += `<table id = 'playlist_table'> 
-					  <tr>
-    					<th>No.</th>
-    					<th>URL</th>
-    				  	<th>Type</th>
-    				  	<th>Action</th>th>
-  					  </tr>
-					</table>`
+	ret += (`<table id = playlist_table><tr>`);
+    	ret += (`<th>No</th>`);
+    	ret += (`<th>URL</th>`);
+    	ret += (`<th>Type</th>`);
+    	ret += (`<th>Action</th>`);
+    	ret += (`</tr>`);
+    	ret += (`</table>`);   
 
 	ret += `
 	<script>
@@ -90,7 +93,7 @@ app.get('/', (req, res) => {
 	</script>
 	`
 
-	if (req.query.audioFile) {
+	if (audioFile) {
 		ret += `<script>document.getElementById("audioAdd").addEventListener('click',
 		() => {
     			let table = document.getElementById('playlist_table');
@@ -108,7 +111,7 @@ app.get('/', (req, res) => {
 		})</script>`
 	}
 
-	if (req.query.videoFile) {
+	if (videoFile) {
 		ret += `<script>document.getElementById('videoAdd').addEventListener('click',
 		() => {
     		let table = document.getElementById('playlist_table');
@@ -125,7 +128,7 @@ app.get('/', (req, res) => {
 		})</script>`
 	}
 
-	if (req.query.imgFile) {
+	if (posterImage) {
 		ret += `<script>document.getElementById("imgAdd").addEventListener('click',
 		() => {
     			let table = document.getElementById('playlist_table');
