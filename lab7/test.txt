@@ -1,1 +1,10 @@
+def process(line):
+    ret = line.replace("\n","")
+    return ret
 
+inf = open("index.html")
+outf = open("output.txt", "w")
+
+for line in inf:
+    output = "ret += `" + process(line) + "`;\n" 
+    outf.write(output)
