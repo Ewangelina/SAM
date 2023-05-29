@@ -12,10 +12,11 @@ app.get('/', (req, res) => {
 		ret += `<audio id = "audioPlayer" src = ${req.query.audioFile}></audio>`;
 		ret += `<button type="button" id = "audioCancel">cancel audio</button>`;
 		ret += `<button type="button" id = "audioAdd">Add audio</button>`;
-		ret += `let aud = document.getElementById("audioPlayer");`;
+		ret += `<script>let aud = document.getElementById("audioPlayer");`;
 		ret += `function playAud() {    aud.play();}`;
-		ret += `function pauseAud() {    aud.pause();}`;
-		ret += `<button type="button" id = "audioPlay" onclick = playAud() >Play Video</button>`;
+		ret += `function pauseAud() {    aud.pause();}</script>`;
+		ret += `<button type="button" id = "audioPlay" onclick = playAud() >Play Audio</button>`;
+		ret += `<button type="button" id = "audioPause" onclick = pauseAud() >Pause Audio</button>`;
 		ret += `<script>document.getElementById("audioCancel").addEventListener('click', 
 		() => document.getElementById("audioPlayer").src = "cancel.mp3")</script>`
 
@@ -24,6 +25,11 @@ app.get('/', (req, res) => {
 		ret += `</br> <video id = "videoPlayer" src = ${req.query.videoFile}></video>`;
 		ret += `<button type="button" id = "videoCancel">cancel video</button>`;
 		ret += `<button type="button" id = "videoAdd">Add video</button>`;
+		ret += `<script>let vid = document.getElementById("audioPlayer");`;
+		ret += `function playVid() {    vid.play();}`;
+		ret += `function pauseVid() {    vid.pause();}</script>`;
+		ret += `<button type="button" id = "videoPlay" onclick = playVid() >Play Video</button>`;
+		ret += `<button type="button" id = "videoPause" onclick = pauseVid() >Pause Video</button>`;
 		ret += `<script>document.getElementById("videoCancel").addEventListener('click', 
 		() => document.getElementById("videoPlayer").src = "cancel.mp4")</script>`
 	}
