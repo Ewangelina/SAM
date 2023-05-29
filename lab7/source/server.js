@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 		ret += `let aud = document.getElementById("audioPlayer");`;
 		ret += `function playAud() {    aud.play();}`;
 		ret += `function pauseAud() {    aud.pause();}`;
-		ret += `<button type="button" id = "audioAdd">Add audio</button>`;
+		ret += `<button type="button" id = "audioPlay" onclick = playAud() >Play Video</button>`;
 		ret += `<script>document.getElementById("audioCancel").addEventListener('click', 
 		() => document.getElementById("audioPlayer").src = "cancel.mp3")</script>`
 
