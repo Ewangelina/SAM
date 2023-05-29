@@ -12,9 +12,10 @@ app.get('/', (req, res) => {
 		ret += `<audio id = "audioPlayer" src = ${req.query.audioFile}></audio>`;
 		ret += `<button type="button" id = "audioCancel">cancel audio</button>`;
 		ret += `<button type="button" id = "audioAdd">Add audio</button>`;
-		ret += `let vid = document.getElementById("audioPlayer");`;
-		ret += `function playVid() {    vid.play();}`;
-		ret += `function pauseVid() {    vid.pause();}`;
+		ret += `let aud = document.getElementById("audioPlayer");`;
+		ret += `function playAud() {    aud.play();}`;
+		ret += `function pauseAud() {    aud.pause();}`;
+		ret += `<button type="button" id = "audioAdd">Add audio</button>`;
 		ret += `<script>document.getElementById("audioCancel").addEventListener('click', 
 		() => document.getElementById("audioPlayer").src = "cancel.mp3")</script>`
 
